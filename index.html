@@ -38,11 +38,31 @@ button:focus-visible{outline:3px solid var(--hay);outline-offset:2px}
 #joy{position:fixed;z-index:2;width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:50%;border:2px solid #fff6;background:#0003;pointer-events:none;display:none}
 #joy i{position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px;border-radius:50%;background:#f3e4c4cc;box-shadow:0 2px 8px #0008}
 .joyhint{position:fixed;left:24px;bottom:calc(30px + env(safe-area-inset-bottom));z-index:2;width:110px;height:110px;border-radius:50%;border:2px dashed #fff5;display:flex;align-items:center;justify-content:center;text-align:center;font-size:13px;font-weight:800;color:#fffc;pointer-events:none;text-shadow:0 1px 3px #000}
-#grab{position:fixed;right:calc(18px + env(safe-area-inset-right));bottom:calc(26px + env(safe-area-inset-bottom));z-index:3;width:104px;height:104px;border-radius:50%;border:4px solid #fff3d1;background:radial-gradient(circle at 35% 30%,#f6d36b,#c58f1c);color:#2b1d0e;font:400 20px Rye,serif;box-shadow:0 6px 18px #0009;touch-action:none}
-#grab.on{transform:scale(.92);background:radial-gradient(circle at 35% 30%,#ffe9a0,#d99a1c)}
-#ctx{position:fixed;left:50%;bottom:calc(36px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:3;display:none;border:0;border-radius:16px;min-height:56px;padding:0 22px;background:#2f6fb0;color:#fff;font:400 19px Rye,serif;box-shadow:0 6px 18px #0009}
+/* panel de control a una mano */
+.dock{position:fixed;bottom:calc(18px + env(safe-area-inset-bottom));z-index:3;width:252px;height:226px;pointer-events:none}
+body.right .dock{right:calc(12px + env(safe-area-inset-right))}body.left .dock{left:calc(12px + env(safe-area-inset-left))}
+.stick{position:absolute;bottom:0;width:152px;height:152px;border-radius:50%;pointer-events:auto;touch-action:none;background:radial-gradient(circle at 50% 40%,#3a2816e6 0,#21160ce6 70%);border:2px solid #9a7444;box-shadow:inset 0 3px 12px #000a,0 8px 22px #000a}
+body.right .stick{right:0}body.left .stick{left:0}
+.stick svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.knob{position:absolute;left:50%;top:50%;width:66px;height:66px;margin:-33px;border-radius:50%;background:radial-gradient(circle at 38% 32%,#fbe6a6,#d9a43a 55%,#a8761c);border:3px solid #fff3d1;box-shadow:0 4px 12px #000b,inset 0 -3px 6px #0004;pointer-events:none;transition:transform .12s ease-out}
+.stick.on .knob{transition:none}
+.stick.on{border-color:#e8b83a}
+#grab{position:absolute;bottom:58px;width:78px;height:78px;border-radius:50%;border:3px solid #fff3d1;background:radial-gradient(circle at 36% 30%,#f8dc7c,#c8901e 70%);color:#2b1d0e;box-shadow:0 6px 16px #000a,inset 0 -4px 8px #0003;touch-action:none;pointer-events:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:0}
+#grab svg{width:30px;height:30px}#grab span{font:800 12px Nunito,sans-serif;margin-top:-1px}
+body.right #grab{right:166px}body.left #grab{left:166px}
+#grab.on{transform:scale(.9);background:radial-gradient(circle at 36% 30%,#ffeaa8,#dba027 70%)}
+#turn{position:absolute;bottom:164px;width:50px;height:50px;border-radius:50%;border:2px solid #9a7444;background:#21160ce6;color:#f3e4c4;pointer-events:auto;touch-action:none;box-shadow:0 4px 12px #0009;display:flex;align-items:center;justify-content:center;padding:0}
+#turn svg{width:26px;height:26px}
+body.right #turn{right:112px}body.left #turn{left:112px}
+#ctx{position:absolute;bottom:160px;display:none;border:0;border-radius:14px;min-height:48px;padding:0 16px;background:#2f6fb0;color:#fff;font:400 17px Rye,serif;box-shadow:0 6px 18px #0009;pointer-events:auto;white-space:nowrap}
+body.right #ctx{right:172px}body.left #ctx{left:172px}
 #ctx.on{display:block}
-.toast{position:fixed;left:50%;bottom:calc(150px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#1d130bd9;color:#f3e4c4;border:1px solid #6b4a2f;font-size:14px;padding:6px 14px;border-radius:16px;font-weight:700;z-index:6;opacity:0;transition:opacity .3s;pointer-events:none;max-width:72vw;text-align:center;line-height:1.3}
+body.classic .stick,body.classic #turn{display:none}
+body.classic .dock{right:calc(14px + env(safe-area-inset-right));left:auto}
+body.classic #grab{right:0;left:auto;bottom:10px;width:88px;height:88px}
+body.classic #ctx{right:0;left:auto;bottom:112px}
+body:not(.classic) .joyhint{display:none}
+.toast{position:fixed;left:50%;top:calc(200px + env(safe-area-inset-top));transform:translateX(-50%);background:#1d130bd9;color:#f3e4c4;border:1px solid #6b4a2f;font-size:14px;padding:6px 14px;border-radius:16px;font-weight:700;z-index:6;opacity:0;transition:opacity .3s;pointer-events:none;max-width:72vw;text-align:center;line-height:1.3}
 .toast.on{opacity:1}
 .ov{position:fixed;inset:0;z-index:8;background:#120b06ee;display:flex;align-items:center;justify-content:center;padding:18px;overflow:auto;touch-action:pan-y}
 .ov[hidden]{display:none}
@@ -98,8 +118,12 @@ h3{font:400 17px Rye,serif;color:var(--hay);margin:14px 0 8px}
 <div class="comp" id="comp"><svg viewBox="0 0 24 24" id="arrow"><path d="M12 2l7 16-7-4-7 4z" fill="#e8b83a" stroke="#1d130b" stroke-width="1.2"/></svg><span id="compT">Montaña de paja</span></div>
 <div id="joy"><i></i></div>
 <div class="joyhint" id="joyhint">Arrastra aquí para andar</div>
-<button id="grab">Coger</button>
-<button id="ctx">Abrir tienda</button>
+<div class="dock" id="dock">
+  <div class="stick" id="stick"><svg viewBox="0 0 152 152" aria-hidden="true"><g fill="#e8d3a8" opacity=".55"><path d="M76 14l10 12H66z"/><path d="M76 138l10-12H66z"/><path d="M14 76l12-10v20z"/><path d="M138 76l-12-10v20z"/></g><circle cx="76" cy="76" r="44" fill="none" stroke="#e8d3a8" stroke-opacity=".18" stroke-width="2"/><text x="76" y="40" text-anchor="middle" font-size="10" font-weight="800" fill="#e8d3a8" opacity=".6" font-family="Nunito,sans-serif">ANDAR</text></svg><i class="knob" id="knob1"></i></div>
+  <button id="grab" aria-label="Coger"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 30V13" stroke="#5a3a14" stroke-width="3" stroke-linecap="round"/><path d="M9 3v7c0 2 3 3 7 3s7-1 7-3V3M16 3v10" fill="none" stroke="#2b1d0e" stroke-width="2.4" stroke-linecap="round"/></svg><span>Coger</span></button>
+  <button id="turn" aria-label="Media vuelta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12a7 7 0 1 0 2-5" fill="none" stroke="#f3e4c4" stroke-width="2.4" stroke-linecap="round"/><path d="M3 4l4 3-4 3z" fill="#f3e4c4"/></svg></button>
+  <button id="ctx">Abrir tienda</button>
+</div>
 <div class="toast" id="toast"></div>
 
 <div class="sheet" id="shop" hidden><div class="sh"><h2>Tienda del pueblo</h2><span class="chip" id="shopCoins"></span><button class="hb" id="shopX">Cerrar</button></div><div class="sc" id="shopBody"></div></div>
@@ -109,7 +133,7 @@ h3{font:400 17px Rye,serif;color:var(--hay);margin:14px 0 8px}
   <h1>La aguja en el pajar</h1>
   <p>Una granja, un granero, cinco millones de briznas de heno y una sola aguja. Sube el volumen.</p>
   <div id="menuBtns"></div>
-  <p class="note" style="margin-top:12px">Joystick a la izquierda para andar · arrastra a la derecha para mirar · mantén <b>Coger</b> mirando a la paja · vende en el puesto de fuera o en la cinta. En ordenador: WASD, ratón y barra espaciadora.</p>
+  <p class="note" style="margin-top:12px">Todo se maneja con un pulgar: el joystick de abajo anda y gira, la cámara apunta sola a la paja y mantienes <b>Coger</b> para recoger. En Menú puedes cambiar de mano, la sensibilidad o volver a los controles clásicos · vende en el puesto de fuera o en la cinta. En ordenador: WASD, ratón y barra espaciadora.</p>
 </div></div>
 <div class="ov" id="win" hidden><div class="box">
   <h1>¡Aguja encontrada!</h1><p id="wSub"></p>
@@ -601,7 +625,7 @@ function moveTo(nx,nz){const h0=pH(P.x,P.z);
  P.x=Math.max(-90,Math.min(90,P.x));P.z=Math.max(-90,Math.min(90,P.z))}
 const ctl=$('ctl'),joyEl=$('joy'),knob=joyEl.firstElementChild;
 ctl.addEventListener('pointerdown',e=>{audioInit();if(paused)return;e.preventDefault();
- if(e.pointerType!=='mouse'&&e.clientX<innerWidth*.45&&!joy){joy={id:e.pointerId,x:e.clientX,y:e.clientY};joyEl.style.display='block';joyEl.style.left=e.clientX+'px';joyEl.style.top=e.clientY+'px';knob.style.transform='';$('joyhint').style.display='none'}
+ if(CTRL.mode==='classic'&&e.pointerType!=='mouse'&&e.clientX<innerWidth*.45&&!joy){joy={id:e.pointerId,x:e.clientX,y:e.clientY};joyEl.style.display='block';joyEl.style.left=e.clientX+'px';joyEl.style.top=e.clientY+'px';knob.style.transform='';$('joyhint').style.display='none'}
  else if(!look)look={id:e.pointerId,x:e.clientX,y:e.clientY};
  try{ctl.setPointerCapture(e.pointerId)}catch(_){}});
 ctl.addEventListener('pointermove',e=>{
@@ -609,6 +633,15 @@ ctl.addEventListener('pointermove',e=>{
  else if(look&&e.pointerId===look.id){const k=e.pointerType==='mouse'?.0045:.0062;yaw-=(e.clientX-look.x)*k;pitch=Math.max(-1.3,Math.min(1.2,pitch-(e.clientY-look.y)*k));look.x=e.clientX;look.y=e.clientY}});
 const endP=e=>{if(joy&&e.pointerId===joy.id){joy=null;inp.mx=inp.my=0;joyEl.style.display='none'}if(look&&e.pointerId===look.id)look=null};
 ctl.addEventListener('pointerup',endP);ctl.addEventListener('pointercancel',endP);
+let CTRL={mode:'one',hand:'right',sens:1};try{Object.assign(CTRL,JSON.parse(localStorage.getItem(KEY+'-ctrl')||'{}'))}catch(e){}
+function applyCtrl(){document.body.className=(CTRL.mode==='one'?'one ':'classic ')+(CTRL.hand==='left'?'left':'right');try{localStorage.setItem(KEY+'-ctrl',JSON.stringify(CTRL))}catch(e){}}
+applyCtrl();
+const stickEl=$('stick'),knob1=$('knob1');let stk=null;inp.sx=0;inp.sy=0;
+stickEl.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();audioInit();if(paused)return;const r=stickEl.getBoundingClientRect();stk={id:e.pointerId,cx:r.left+r.width/2,cy:r.top+r.height/2};stickEl.classList.add('on');try{stickEl.setPointerCapture(e.pointerId)}catch(_){}stickMove(e)});
+function stickMove(e){if(!stk||e.pointerId!==stk.id)return;let dx=e.clientX-stk.cx,dy=e.clientY-stk.cy;const d=Math.hypot(dx,dy),mx=50;if(d>mx){dx*=mx/d;dy*=mx/d}inp.sx=dx/mx;inp.sy=dy/mx;knob1.style.transform=`translate(${dx}px,${dy}px)`}
+stickEl.addEventListener('pointermove',stickMove);
+['pointerup','pointercancel','lostpointercapture'].forEach(ev=>stickEl.addEventListener(ev,e=>{if(stk&&e.pointerId===stk.id){stk=null;inp.sx=inp.sy=0;knob1.style.transform='';stickEl.classList.remove('on')}}));
+let turnLeft=0;$('turn').addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();audioInit();if(paused)return;turnLeft=Math.PI;buzz(12)});
 const gb=$('grab');
 gb.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();audioInit();inp.grab=true;gb.classList.add('on');try{gb.setPointerCapture(e.pointerId)}catch(_){}});
 ['pointerup','pointercancel','lostpointercapture'].forEach(ev=>gb.addEventListener(ev,()=>{inp.grab=false;gb.classList.remove('on')}));
@@ -688,11 +721,15 @@ function rPause(){const ps=perSec(),f=Object.values(S.found).reduce((a,b)=>a+b,0
  h+=`<h3>Sonido</h3><div class="row"><div class="t"><b>Efectos</b><span>Paja, pasos, herramientas, monedas</span></div><button class="buy" data-p="snd">${sndOn?'Activado':'Silenciado'}</button></div>
  <div class="row"><div class="t"><b>Ambiente de granja</b><span>Viento, pájaros, vacas, la cinta y tus animales</span></div><button class="buy" data-p="amb">${ambOn?'Activado':'Silenciado'}</button></div>
  <button class="buy" style="width:100%;margin-bottom:6px" data-p="test">Probar sonido</button><p class="note">En iPhone, si no oyes nada, sube el volumen y quita el modo silencio.</p>
+ <h3>Controles</h3>
+ <div class="row"><div class="t"><b>Modo</b><span>${CTRL.mode==='one'?'Una mano: el joystick anda y gira y la cámara apunta sola':'Clásico: joystick a la izquierda y arrastrar para mirar'}</span></div><button class="buy" data-p="mode">${CTRL.mode==='one'?'Una mano':'Clásico'}</button></div>
+ ${CTRL.mode==='one'?`<div class="row"><div class="t"><b>Mano</b><span>Lado de la pantalla donde van los controles</span></div><button class="buy" data-p="hand">${CTRL.hand==='left'?'Izquierda':'Derecha'}</button></div>
+ <div class="row"><div class="t"><b>Sensibilidad del giro</b><span>${['Muy suave','Suave','Normal','Rápida','Muy rápida','Máxima'][Math.round((CTRL.sens-.5)/.3)]||'Normal'}</span></div><button class="buy" data-p="sens-" style="min-width:48px" aria-label="Menos">−</button><button class="buy" data-p="sens+" style="min-width:48px" aria-label="Más">+</button></div>`:''}
  <h3>Partida</h3><div class="row"><div class="t"><b>Volver al menú</b><span>La partida queda guardada</span></div><button class="buy" data-p="menu">Menú</button></div>`;
  $('pauseBody').innerHTML=h}
 $('pauseBtn').addEventListener('click',()=>{audioInit();if(!S)return;save();rPause();$('pause').hidden=false;paused=true;inp.grab=false});
 $('pauseBody').addEventListener('click',e=>{const b=e.target.closest('button[data-p]');if(!b)return;const a=b.dataset.p;
- if(a==='snd')setSnd(!sndOn);else if(a==='amb'){ambOn=!ambOn;if(AMB)AMB.gain.setTargetAtTime(ambOn?.9:0,AC.currentTime,.1)}else if(a==='test'){setSnd(true);sTool('pala');setTimeout(()=>sCoins(6),500)}else if(a==='menu'){save();$('pause').hidden=true;openMenu();return}rPause()});
+ if(a==='snd')setSnd(!sndOn);else if(a==='amb'){ambOn=!ambOn;if(AMB)AMB.gain.setTargetAtTime(ambOn?.9:0,AC.currentTime,.1)}else if(a==='test'){setSnd(true);sTool('pala');setTimeout(()=>sCoins(6),500)}else if(a==='menu'){save();$('pause').hidden=true;openMenu();return}else if(a==='mode'){CTRL.mode=CTRL.mode==='one'?'classic':'one';applyCtrl()}else if(a==='hand'){CTRL.hand=CTRL.hand==='left'?'right':'left';applyCtrl()}else if(a==='sens-'||a==='sens+'){CTRL.sens=Math.max(.5,Math.min(2,+(CTRL.sens+(a==='sens+'?.3:-.3)).toFixed(2)));applyCtrl()}rPause()});
 $('sndBtn').addEventListener('click',()=>{audioInit();setSnd(!sndOn);if(sndOn)sTool('guantes')});
 
 function go(){$('menu').hidden=true;$('win').hidden=true;closeSheets();paused=false;
@@ -717,7 +754,10 @@ function adapt(dt){if(qLvl>=2||paused)return;qT+=dt;qN++;if(qT>=2.5){const ms=qT
 function frame(t){const rdt=(t-last)/1000,dt=Math.min(.05,rdt);last=t;if(S&&rdt<1)adapt(rdt);
  if(S&&!paused&&!S.won){
   S.ms+=dt*1000;
-  let mx=inp.mx,my=inp.my;const K=inp.keys;if(K.KeyW||K.ArrowUp)my-=1;if(K.KeyS||K.ArrowDown)my+=1;if(K.KeyA)mx-=1;if(K.KeyD)mx+=1;if(K.ArrowLeft)yaw+=dt*2;if(K.ArrowRight)yaw-=dt*2;
+  let mx=inp.mx,my=inp.my;const K=inp.keys;
+  if(CTRL.mode==='one'){const dz=v=>Math.abs(v)<.14?0:Math.sign(v)*((Math.abs(v)-.14)/.86);const tx=dz(inp.sx),ty=dz(inp.sy);yaw-=Math.sign(tx)*tx*tx*2.3*CTRL.sens*dt;my+=ty;
+   if(!look){const fx0=-Math.sin(yaw),fz0=-Math.cos(yaw);let tp=-.06;const near=Math.hypot(P.x-MC.x,P.z-MC.z)<footR+4.5;if(near){let best=-1,bd=2.2;for(let d=1.2;d<=3.4;d+=.45){const h=hAt(P.x+fx0*d,P.z+fz0*d);if(h>.25){best=h;bd=d;break}}if(best>0)tp=Math.max(-.75,Math.min(.25,Math.atan2(Math.min(best,2.4)*.75-1.55,bd)))}pitch+=(tp-pitch)*Math.min(1,dt*3.2)}}
+  if(turnLeft>0){const st=Math.min(turnLeft,dt*9);yaw+=st;turnLeft-=st}if(K.KeyW||K.ArrowUp)my-=1;if(K.KeyS||K.ArrowDown)my+=1;if(K.KeyA)mx-=1;if(K.KeyD)mx+=1;if(K.ArrowLeft)yaw+=dt*2;if(K.ArrowRight)yaw-=dt*2;
   const m=Math.min(1,Math.hypot(mx,my));
   if(m>.08){const sp=BOOTS[pur()?0:S.boots].sp*(inBarn()?1:1.15),fx=-Math.sin(yaw),fz=-Math.cos(yaw),rx=Math.cos(yaw),rz=-Math.sin(yaw),a=Math.hypot(mx,my)||1;
    const vx=(fx*-my+rx*mx)/a*m*sp*dt,vz=(fz*-my+rz*mx)/a*m*sp*dt,ox=P.x,oz=P.z;moveTo(P.x+vx,P.z+vz);const mv=Math.hypot(P.x-ox,P.z-oz);bob+=mv*2.6;stepAcc+=mv;if(stepAcc>1.15){stepAcc=0;sStep(inBarn())}}
